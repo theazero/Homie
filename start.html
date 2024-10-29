@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homie</title>
+<<<<<<< HEAD
 </head>
 <body>
     <h1>HOMIE</h1>
@@ -12,3 +13,55 @@
     <script src="index.js"></script>
 </body>
 </html>
+=======
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <h1 class="title">Homie</h1>
+
+    <div class="background-layer"></div>
+
+    
+    <div class="container">
+        <h1>Track Household Chores</h1>
+
+        
+        <label for="person1">Person 1:</label>
+        <input type="text" id="person1" placeholder="Enter name for Person 1">
+        <label for="person2">Person 2:</label>
+        <input type="text" id="person2" placeholder="Enter name for Person 2">
+        <button id="saveNames">Save names</button>
+
+        <select id="taskSelect">
+            <option value="vacuum">Vacuum</option>
+            <option value="dishes">Dishes</option>
+            <option value="laundry">Laundry</option>
+            <option value="cook">Cook</option>
+            <option value="tidy">Tidy up</option>
+            <option value="Grocery">Grocery shop</option>
+            <option value="cleaning">Dusting</option>
+            <option value="trash"> Throw trash</option>
+            <option value="other">Other</option>
+        </select>
+        <input type="number" id="taskTime" placeholder="Time (minutes)">
+        <select id="personSelect">
+            <option value="person1">Person 1</option>
+            <option value="person2">Person 2</option>
+        </select>
+        <button id="addTask">Add chore</button>
+
+        
+        <h2>Completed Chores</h2>
+        <ul id="taskList"></ul>
+
+        
+        <p id="comparison"></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+    
+>>>>>>> 0ad68e1 (more styling and functions)
