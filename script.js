@@ -1,14 +1,30 @@
+// Toggle dark mode
+document.getElementById("darkModeSwitch").addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+});
 
+// Variables
 let person1 = "Person 1";
 let person2 = "Person 2";
-let timeData = { person1: 0, person2: 0 }; 
+let timeData = { person1: 0, person2: 0 };
 
+// Save Names
 document.getElementById('saveNames').addEventListener('click', () => {
     person1 = document.getElementById('person1').value || "Person 1";
     person2 = document.getElementById('person2').value || "Person 2";
-    alert(`Names saved: ${person1} and ${person2}`);
+    document.getElementById('saveNames').style.display = "none";
+    document.getElementById('personSelect').options[0].text = person1;
+    document.getElementById('personSelect').options[1].text = person2;
 });
 
+// Add Task with Enter Key
+document.addEventListener('keydown', (event) => {
+    if (event.key === "Enter") {
+        document.getElementById('addTask').click();
+    }
+});
+
+// Add Task
 document.getElementById('addTask').addEventListener('click', () => {
     const task = document.getElementById('taskSelect').value;
     const time = parseInt(document.getElementById('taskTime').value);
@@ -20,11 +36,7 @@ document.getElementById('addTask').addEventListener('click', () => {
         return;
     }
 
-    if (person === "person1") {
-        timeData.person1 += time;
-    } else {
-        timeData.person2 += time;
-    }
+    timeData[person] += time;
 
     const taskList = document.getElementById('taskList');
     const listItem = document.createElement('li');
@@ -35,21 +47,18 @@ document.getElementById('addTask').addEventListener('click', () => {
     updateComparison();
 });
 
- function updateComparison() {
-    const person1Time = timeData.person1;
-    const person2Time = timeData.person2;
+// Update Comparison
+function updateComparison() {
+    const { person1: person1Time, person2: person2Time } = timeData;
     let comparisonText = "";
 
     if (person1Time > person2Time) {
-        const difference = person1Time - person2Time;
-        comparisonText = `${person2} needs to add ${difference} more minutes to match ${person1}.`;
+        comparisonText = `${person2} needs to add ${person1Time - person2Time} more minutes to match ${person1}.`;
     } else if (person2Time > person1Time) {
-        const difference = person2Time - person1Time;
-        comparisonText = `${person1} needs to add ${difference} more minutes to match ${person2}.`;
+        comparisonText = `${person1} needs to add ${person2Time - person1Time} more minutes to match ${person2}.`;
     } else {
         comparisonText = "Both have contributed equally in terms of time!";
     }
 
-   
     document.getElementById('comparison').textContent = comparisonText;
 }

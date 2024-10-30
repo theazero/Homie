@@ -1,9 +1,7 @@
-
 body {
-    background: rgb(222, 209, 251);
-    background: linear-gradient(94deg, rgba(222, 209, 251, 1) 0%, rgba(225, 213, 254, 0.88) 50%, rgba(181, 156, 205, 1) 85%);
-    font-family: Arial, Helvetica, sans-serif;
-    color: #333;
+    background: linear-gradient(0deg, rgba(247,239,229,1) 0%, rgba(255,255,255,1) 85%);
+    font-family: Helvetica, Arial, sans-serif;
+    color: #393836;
     margin: 0;
     padding: 0;
     display: flex;
@@ -12,108 +10,124 @@ body {
     min-height: 100vh;
 }
 
+.dark-mode-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    margin-right: 50px;
+    z-index: 9999;
+}
+
+.dark-mode-toggle p {
+position: relative;
+display: inline;
+}
+input[type="checkbox"] { display: none; }
+.slider {
+    width: 50px;
+    height: 25px;
+    background-color: #ccc;
+    border-radius: 34px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.4s;
+}
+.slider::before {
+    content: "";
+    position: absolute;
+    width: 21px;
+    height: 21px;
+    border-radius: 50%;
+    background-color: rgb(0, 0, 0);
+    top: 2px;
+    left: 3px;
+    z-index: 999;
+}
+input[type="checkbox"]:checked + .slider {
+    background-color: #547ba5;
+}
+input[type="checkbox"]:checked + .slider::before {
+    transform: translateX(24px);
+    background-color: #ADC5E7;
+}
+
+
+body.dark-mode {
+    background: linear-gradient(0deg, rgb(39, 39, 47) 0%, rgba(15, 15, 20, 1) 100%);
+    color: #E5E5E5;
+}
+.dark-mode .title,
+.dark-mode h1,
+.dark-mode label,
+.dark-mode #comparison {
+    color: #ADC5E7;
+}
+.dark-mode .container {
+    background-color: #4d4d5e;
+    color: #DADADA;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+.dark-mode button {
+    background-color: #547BA5;
+    color: #E5E5E5;
+}
+.dark-mode button:hover {
+    background-color: #3C3C55;
+}
+.dark-mode ul#taskList li {
+    background-color: #67657b;
+    border-left: 4px solid #547BA5;
+}
+.dark-mode #saveNames,
+.dark-mode #addTask {
+    background-color: #595950;
+    color: #E5E5E5;
+}
+
 
 .title {
     font-size: 4rem;
-    color: #5a3e8c;
+    color: #52271D;
     position: absolute;
-    top: 0%;
+    top: 5%;
     z-index: 2;
-    align-items: center;
-
-    
-
+    text-transform: uppercase;
+    text-shadow: 0px 10px 10px #f3e9d6;
 }
 
+
 .container {
-    background-color: #fff;
+    background-color: #f2f1ef;
     padding: 2rem;
     border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1), 0 4px 10px rgba(0, 0, 0, 0.08);
     max-width: 600px;
     width: 90%;
     text-align: center;
-    z-index: 2;
     position: relative;
 }
 
-h1 {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #5a3e8c;
-    margin-bottom: 1.5rem;
-}
-
-label {
-    font-size: 0.9rem;
-    font-weight: bold;
-    color: #333;
-}
-
-input, select, button {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1rem;
-    padding: 0.5rem;
-    margin: 0.5rem 0;
-    border-radius: 4px;
-    border: 1px solid #d0c4de;
-    background-color: #faf8fc;
-    color: #333;
-}
+h1 
+{ font-size: 2rem; font-weight: bold; color: #5b5956; margin-bottom: 1.5rem;
+ }
 
 button {
-    background-color: #5a3e8c;
-    color: #fff;
+    background-color: #547ba5;
+    color: #f2f1ef;
+    padding: 0.5rem 1rem;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    display: inline-block;  
-    width: auto;
-    padding: 0.5rem 1rem;  
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
-
-button:hover {
-    background-color: #44306b;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
-}
-
-ul#taskList {
-    list-style: none;
-    padding: 0;
-}
-
+button:hover { background-color: #22364a; }
 ul#taskList li {
     font-size: 1rem;
-    background-color: #f1ecf7;
-    border-left: 4px solid #b09ac9;
+    background-color: #e5ecf7;
+    border-left: 4px solid #adc5e7;
     padding: 0.5rem;
     margin-bottom: 0.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-radius: 4px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-#comparison {
-    font-size: 1rem;
-    font-weight: bold;
-    color: #5a3e8c;
-    margin-top: 1rem;
-}
-
-#saveNames, #addTask {
-    width: 100%;
-}
-
-.background-layer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(94deg, rgba(222, 209, 251, 1) 0%, rgba(225, 213, 254, 0.88) 50%, rgba(181, 156, 205, 1) 85%);
-    z-index: 1;
-    filter: blur(20px);
 }
