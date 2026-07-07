@@ -8,53 +8,147 @@
 </head>
 <body>
 
-    <div class="dark-mode-toggle">
-        <p>Too bright!</p>
-        <input type="checkbox" id="darkModeSwitch" onclick="toggleDarkMode()">
-        <label for="darkModeSwitch" class="slider"></label>
-    </div>
-    
-
-
-    <h1 class="title">Homie</h1>
-
     <div class="background-layer"></div>
 
-    
     <div class="container">
-        <h1>Track Household Chores</h1>
+        <header class="statement-header">
+            <div>
+                <p class="eyebrow">For an equal household</p>
+                <h1>HOMIE</h1>
+            </div>
+            <div class="statement-date">
+                <span>Week</span>
+                <strong id="weekNumber">--</strong>
+            </div>
+        </header>
 
-        
-        <label for="person1">Person 1:</label>
-        <input type="text" id="person1" placeholder="Enter name for Person 1">
-        <label for="person2">Person 2:</label>
-        <input type="text" id="person2" placeholder="Enter name for Person 2">
-        <button id="saveNames">Save names</button>
+        <section class="summary-grid" aria-label="Household summary">
+            <article class="summary-card">
+                <h2>Household Summary</h2>
+                <dl>
+                    <div>
+                        <dt>Total minutes</dt>
+                        <dd id="totalMinutes">0</dd>
+                    </div>
+                    <div>
+                        <dt>Completed chores</dt>
+                        <dd id="completedCount">0</dd>
+                    </div>
+                    <div>
+                        <dt>Difference</dt>
+                        <dd id="balanceDue">0 min</dd>
+                    </div>
+                </dl>
+            </article>
 
-        <select id="taskSelect">
-            <option value="vacuum">Vacuum</option>
-            <option value="dishes">Dishes</option>
-            <option value="laundry">Laundry</option>
-            <option value="cook">Cook</option>
-            <option value="tidy">Tidy up</option>
-            <option value="Grocery">Grocery shop</option>
-            <option value="cleaning">Dusting</option>
-            <option value="trash"> Throw trash</option>
-            <option value="other">Other</option>
-        </select>
-        <input type="number" id="taskTime" placeholder="Time (minutes)">
-        <select id="personSelect">
-            <option value="person1">Person 1</option>
-            <option value="person2">Person 2</option>
-        </select>
-        <button id="addTask">Add chore</button>
+            <article class="summary-card">
+                <h2>Shared Workload</h2>
+                <dl>
+                    <div>
+                        <dt><span class="dot dot-a"></span><span id="person1AllocationLabel">Person 1</span></dt>
+                        <dd id="person1Percent">50%</dd>
+                    </div>
+                    <div>
+                        <dt><span class="dot dot-b"></span><span id="person2AllocationLabel">Person 2</span></dt>
+                        <dd id="person2Percent">50%</dd>
+                    </div>
+                    <div>
+                        <dt><span class="dot dot-c"></span>Shared goal</dt>
+                        <dd>Even</dd>
+                    </div>
+                </dl>
+            </article>
+        </section>
 
-        
-        <h2>Completed Chores</h2>
-        <ul id="taskList"></ul>
+        <main class="statement-body">
+            <section class="allocation-panel" aria-label="Contribution visualization">
+                <div class="allocation-account">
+                    <div class="allocation-account-header">
+                        <span class="dot dot-a"></span>
+                        <h2 id="person1GraphLabel">Person 1</h2>
+                        <strong id="person1GraphMinutes">0 min</strong>
+                    </div>
+                    <div class="allocation-stack" id="person1ChoreMap">
+                        <div class="empty-allocation">
+                            <span>+</span>
+                            <p>Add names to begin</p>
+                        </div>
+                    </div>
+                </div>
 
-        
-        <p id="comparison"></p>
+                <div class="allocation-account">
+                    <div class="allocation-account-header">
+                        <span class="dot dot-b"></span>
+                        <h2 id="person2GraphLabel">Person 2</h2>
+                        <strong id="person2GraphMinutes">0 min</strong>
+                    </div>
+                    <div class="allocation-stack" id="person2ChoreMap">
+                        <div class="empty-allocation">
+                            <span>+</span>
+                            <p>Add names to begin</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="action-panel">
+                <h2>Add Chore</h2>
+
+                <div class="name-grid">
+                    <p class="form-note">Start by naming the household members. Chores unlock after this step.</p>
+                    <label for="person1">Person 1</label>
+                    <input type="text" id="person1" placeholder="Enter name">
+                    <label for="person2">Person 2</label>
+                    <input type="text" id="person2" placeholder="Enter name">
+                    <button id="saveNames">Save names</button>
+                </div>
+
+                <div class="chore-grid is-locked" id="choreForm" aria-hidden="true">
+                    <p class="form-note chore-note">Household names saved. Now log each chore as it happens.</p>
+                    <label for="taskSelect">Chore</label>
+                    <select id="taskSelect" class="native-select" tabindex="-1" aria-hidden="true">
+                        <option value="vacuum">Vacuum</option>
+                        <option value="dishes">Dishes</option>
+                        <option value="laundry">Laundry</option>
+                        <option value="cook">Cook</option>
+                        <option value="tidy">Tidy up</option>
+                        <option value="grocery">Grocery shop</option>
+                        <option value="cleaning">Dusting</option>
+                        <option value="trash">Throw trash</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <div class="custom-select" data-select="taskSelect"></div>
+
+                    <label for="taskTime">Minutes</label>
+                    <input type="number" id="taskTime" placeholder="Time">
+
+                    <label for="personSelect">Assigned to</label>
+                    <select id="personSelect" class="native-select" tabindex="-1" aria-hidden="true">
+                        <option value="person1">Person 1</option>
+                        <option value="person2">Person 2</option>
+                    </select>
+                    <div class="custom-select" data-select="personSelect"></div>
+
+                    <button id="addTask">Add chore</button>
+                </div>
+            </section>
+        </main>
+
+        <section class="ledger">
+            <div class="ledger-header">
+                <h2>Completed Chores</h2>
+                <p id="comparison">Both have contributed equally in terms of time.</p>
+            </div>
+            <ul id="taskList"></ul>
+        </section>
+    </div>
+
+    <div class="modal-overlay" id="appModal" hidden>
+        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <h2 id="modalTitle">One thing first</h2>
+            <p id="modalMessage"></p>
+            <button id="modalClose">Got it</button>
+        </div>
     </div>
 
     <script src="script.js"></script>

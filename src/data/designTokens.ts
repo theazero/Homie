@@ -1,0 +1,35 @@
+export const designTokens = {
+  colors: {
+    paper: "#fbf8f0",
+    paperSoft: "#f2f1ef",
+    ink: "#393836",
+    muted: "#77736c",
+    line: "rgba(57, 56, 54, 0.18)",
+    brown: "#52271d",
+    blue: "#547ba5",
+    blueSoft: "#adc5e7",
+    olive: "#8b985c",
+    greenSoft: "#d9f074",
+  },
+  radii: {
+    pill: 999,
+    modal: 32,
+    select: 21.6,
+  },
+  typography: {
+    family: "Helvetica, Arial, sans-serif",
+    heroLetterSpacing: -0.1,
+    eyebrowLetterSpacing: 0.1,
+  },
+  taskAccents: {
+    vacuum: "#547ba5",
+    dishes: "#3f806f",
+    laundry: "#7354a4",
+    cook: "#a65626",
+    tidy: "#8b985c",
+    grocery: "#c45f86",
+    cleaning: "#52271d",
+    trash: "#595950",
+    other: "#393836",
+  },
+} as const;
